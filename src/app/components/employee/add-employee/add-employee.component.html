@@ -1,0 +1,143 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Empleados
+            <small>Agregar</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Empleados</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title" style="margin-top: 16px">Agregar Empleados</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <label for="nameInput">Nombre</label>
+                                <input type="text" class="form-control" placeholder="" [(ngModel)]="empleado.firstname">
+                            </div>
+                            <div class="col-xs-3">
+                                <label for="lastnameInput">Apellido</label>
+                                <input type="text" class="form-control" placeholder="" [(ngModel)]="empleado.lastname">
+                            </div>
+                            <div class="col-xs-3">
+                                <label for="identificationInput">Cédula</label>
+                                <input type="text" class="form-control" placeholder="" [(ngModel)]="empleado.identification">
+                            </div>
+                            <div class="col-xs-3">
+                                <label for="birthdayInput">Fecha de Nacimiento</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right" id="datepicker" [ngModel]="empleado.birthday | date:'yyyy-MM-dd'" name="birthday" #birthday="ngModel" #eEDatePicker (blur)="empleado.birthday = eEDatePicker.value" data-date-format="yyyy-mm-dd">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <div class="form-group">
+                                    <label>Sexo</label>
+                                    <select class="form-control" [(ngModel)]="empleado.genre">
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Femenino</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="form-group">
+                                    <label>Ocupación</label>
+                                    <select class="form-control" [(ngModel)]="empleado.ocupation">
+                                        <option>Plomero</option>
+                                        <option>Plomero Principiante</option>
+                                        <option>Ayudante</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <label for="nameInput">Contrato en meses</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                    <input type="text" class="form-control" placeholder="" [(ngModel)]="empleado.term">
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <label>Rata por Hora</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input type="text" class="form-control" [(ngModel)]="empleado.rate">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <div class="form-group">
+                                    <label>Activo</label>
+                                    <select class="form-control" [(ngModel)]="empleado.active">
+                                        <option value="1">Sí</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="form-group">
+                                    <label>Club de Ahorro</label>
+                                    <select class="form-control" [(ngModel)]="empleado.club">
+                                        <option value="1">Sí</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button routerLink="/employee" routerLinkActive="router-link-active" class="btn btn-danger">Cancelar</button>
+                        <button data-toggle="modal" data-target="#modal-default" class="btn btn-success pull-right">Guardar</button>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+        </div>
+        <!-- /.row -->
+
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Crear Empleado</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Esta seguro que desea agregar el registro?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancelar</button>
+                        <button (click)="addEmployee(empleado)" type="button" data-dismiss="modal" class="btn btn-primary">Agregar</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    </section>
+    <!-- /.content -->
+
+</div>

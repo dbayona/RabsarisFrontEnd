@@ -1,0 +1,180 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Detalle Horas Laborables
+            <small>Actualizar</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Horas</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title" style="margin-top: 16px">Editar Detalles Horas</h3>
+                    </div>
+                    <!-- /.box-header -->
+
+                    <div class="box-body">
+
+                        <h5 class="box-title" style="margin-top: 6px">{{ fullName }} - {{ startDate | titlecase }} al {{ endDate | titlecase }}</h5>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Entrada</th>
+                                            <th>Salida</th>
+                                            <th>Entrada Extra</th>
+                                            <th>Salida Extra</th>
+                                            <th>Horas Regulares</th>
+                                            <th>Horas Extras</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let employee of employeesHoursDetails; let i = index">
+                                            <td id="id_date{{i}}">{{employee.id_date | date:'dd MMMM yyyy' | titlecase}}</td>
+                                            <td id="start_regular_time{{i}}">{{employee.start_regular_time}}</td>
+                                            <td id="end_regular_time{{i}}">{{employee.end_regular_time}}</td>
+                                            <td id="start_over_time{{i}}">{{employee.start_over_time}}</td>
+                                            <td id="end_over_time{{i}}">{{employee.end_over_time}}</td>
+                                            <td id="total_regular_time{{i}}">{{employee.total_regular_time}}</td>
+                                            <td id="total_over_time{{i}}">{{employee.total_over_time}}</td>
+                                            <td>
+                                                <a id="{{i}}" (click)="onClick(employee)" data-toggle="modal" data-target="#modal-default" class="text-green" style="font-size:20px; margin-right: 20px; cursor: pointer;">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button (click)="btnCancel()" class="btn btn-danger">Cancelar</button>
+                        <button (click)="null" data-toggle="modal" data-target="#modal-default1" class="btn btn-success pull-right">Guardar</button>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+        </div>
+        <!-- /.row -->
+
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                        <!--<h4 class="modal-title">{{Fullname}}</h4>-->
+                        <h4 class="modal-title">{{ titleModalDate | date:'dd MMMM yyyy' | titlecase }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xs-3 align-items-center">
+                                <label>Horario Regular</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-4">
+                                <!-- time Picker -->
+                                <div class="bootstrap-timepicker">
+                                    <label>Entrada</label>
+                                    <div class="input-group">
+                                        <input id="timepicker1" type="text" class="form-control timepicker" [ngModel]="empHourDetails.start_regular_time" name="start_regular_time" #start_regular_time="ngModel" #eEDatePicker (blur)="empHourDetails.start_regular_time = eEDatePicker.value">
+
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end time Picker-->
+                            </div>
+                            <div class="col-xs-4">
+                                <!-- time Picker -->
+                                <div class="bootstrap-timepicker">
+                                    <label>Salida</label>
+                                    <div class="input-group">
+                                        <input id="timepicker2" type="text" class="form-control timepicker">
+
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end time Picker-->
+                            </div>
+                            <div class="col-xs-2"></div>
+                        </div>
+                        <p></p>
+                        <p></p>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <label class="align-center">Horario Extraordinario</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-4">
+                                <!-- time Picker -->
+                                <div class="bootstrap-timepicker">
+                                    <label>Entrada</label>
+                                    <div class="input-group">
+                                        <input id="timepicker3" type="text" class="form-control timepicker">
+
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end time Picker-->
+                            </div>
+                            <div class="col-xs-4">
+                                <!-- time Picker -->
+                                <div class="bootstrap-timepicker">
+                                    <label>Salida</label>
+                                    <div class="input-group">
+                                        <input id="timepicker4" type="text" class="form-control timepicker">
+
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end time Picker-->
+                            </div>
+                            <div class="col-xs-2"></div>
+                        </div>
+                        <div class="col-xs-4"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button (click)="null" type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancelar</button>
+                        <button (click)="null" type="button" data-dismiss="modal" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+    </section>
+    <!-- /.content -->
+
+</div>

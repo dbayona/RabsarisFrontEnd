@@ -1,0 +1,107 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Club de Ahorro
+            <small>Registro</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Pagos</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header ">
+                        <h3 class="box-title" style="margin-top: 16px">Listado de Club de Ahorro</h3>
+                    </div>
+                    <!-- /.box-header -->
+
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Ahorro Mensual</th>
+                                    <th>Inicio</th>
+                                    <th>Fin</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let clubinfo of allClub">
+                                    <td id="fullname{{clubinfo.id}}">{{clubinfo.firstname + ' ' + clubinfo.lastname}}</td>
+                                    <td id="monthly_fee{{clubinfo.id}}">{{ clubinfo.monthly_fee }}</td>
+                                    <td id="start_date{{clubinfo.id}}">{{ clubinfo.start_date | date:'yyyy-MM-dd'}}</td>
+                                    <td id="end_date{{clubinfo.id}}">{{clubinfo.end_date | date:'yyyy-MM-dd'}}</td>
+                                    <td>
+                                        <a id="{{clubinfo.id}}" (click)="onClick(clubinfo)" data-toggle="modal" data-target="#modal-default1" class="text-green" style="font-size:20px; margin-right: 20px; cursor: pointer;">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="modal fade" id="modal-default1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">{{Fullname}}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <label for="dateStart">Fecha Inicio</label>
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right" id="datepicker" [ngModel]="club.start_date | date:'yyyy-MM-dd'" name="start_date" #start_date="ngModel" #eEDatePicker (blur)="club.start_date = eEDatePicker.value" data-date-format="yyyy-mm-dd">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <label for="dateEnd">Fecha Fin</label>
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right" id="datepicker2" [ngModel]="club.end_date | date:'yyyy-MM-dd'" name="end_date" #endDate="ngModel" #eEDatePicker2 (blur)="club.end_date = eEDatePicker2.value" data-date-format="yyyy-mm-dd">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <label for="lastnameInput">Ahorro Mensual</label>
+                                            <input type="text" class="form-control" placeholder="" [(ngModel)]="club.monthly_fee">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button (click)="cancelClub()" type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancelar</button>
+                                    <button (click)="updateClub($event)" type="button" data-dismiss="modal" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+
+</div>
