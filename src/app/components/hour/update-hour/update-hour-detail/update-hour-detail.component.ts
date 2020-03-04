@@ -91,13 +91,12 @@ export class UpdateHourDetailComponent implements OnInit {
     console.log('ONCLICK');
     console.log(employee);
 
-    // Set default time to 7:00 AM
-    // $('#timepicker1').timepicker('setTime', this.tpStartTime);
-
     this.titleModalDate = employee.id_date;
     this.empHourDetails = employee;
-
     this.empHourDetails.start_regular_time = (employee.start_regular_time == null ? this.tpStartTime : employee.start_regular_time);
+
+    // Set default time to 7:00 AM or value Model empHourDetails.start_regular_time
+    $('#timepicker1').timepicker('setTime', this.empHourDetails.start_regular_time);
   }
 
   btnCancel() {
