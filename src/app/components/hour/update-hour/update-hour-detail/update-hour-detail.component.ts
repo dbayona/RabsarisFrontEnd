@@ -162,5 +162,21 @@ export class UpdateHourDetailComponent implements OnInit {
   btnGuardar() {
     console.log('Modelo');
     console.log(this.employeesHoursDetails);
+
+    // let arrValues = Object.values( this.employeesHoursDetails) ;
+    // console.log(arrValues);
+
+    // items = items.map(x => (x.id === item.id) ? item : x)
+    this.employeesHoursDetails = this.employeesHoursDetails.map(x => {
+      return {
+        ...x,
+        start_regular_time:  moment(x.start_regular_time, 'h:mm A').format('HH:mm'),
+        end_regular_time:  moment(x.end_regular_time, 'h:mm A').format('HH:mm'),
+        start_over_time:  moment(x.start_over_time, 'h:mm A').format('HH:mm'),
+        end_over_time:  moment(x.end_over_time, 'h:mm A').format('HH:mm')
+      };
+    });
+
+    console.log(this.employeesHoursDetails);
   }
 }
