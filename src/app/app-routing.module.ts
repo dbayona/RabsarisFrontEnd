@@ -22,7 +22,7 @@ import { LiquidationDetailComponent } from './components/payments/liquidation/li
 import { ReadThirdDetailComponent } from './components/payments/third/thirddetail/read-thirddetail/read-thirddetail.component';
 
 
-//const routes: Routes = [
+// const routes: Routes = [
 export const ROUTES: Routes = [
 {
   path: 'employee', component: EmployeeComponent

@@ -4,6 +4,6 @@ export class EmployeeHoursDetails {
     end_regular_time: string;
     start_over_time: string;
     end_over_time: string;
-    total_regular_time: string;
-    total_over_time: string;
+    total_regular_time: number;
+    total_over_time: number;
 }

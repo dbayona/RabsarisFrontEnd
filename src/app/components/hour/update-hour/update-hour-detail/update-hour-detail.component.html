@@ -45,7 +45,7 @@
                                     <tbody>
                                         <tr *ngFor="let employee of employeesHoursDetails; let i = index">
                                             <td id="id_date{{i}}">{{employee.id_date | date:'dd MMMM yyyy' | titlecase}}</td>
-                                            <td id="start_regular_time{{i}}">{{employee.start_regular_time | date:'h:mm a z'}}</td>
+                                            <td id="start_regular_time{{i}}">{{employee.start_regular_time}}</td>
                                             <td id="end_regular_time{{i}}">{{employee.end_regular_time}}</td>
                                             <td id="start_over_time{{i}}">{{employee.start_over_time}}</td>
                                             <td id="end_over_time{{i}}">{{employee.end_over_time}}</td>

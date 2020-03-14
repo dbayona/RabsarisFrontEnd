@@ -68,6 +68,11 @@ export class EmployeeService {
     return this.http.get<Hours[]>(`${this.Url}/hours/all`);
   }
 
+  // Update Worked Hours by employee
+  putUpdateHoursDetails(data) {
+    return this.http.put<EmployeeHoursDetails>(`${this.Url}/hours/details/update/`, data);
+  }
+
   // List all clubs
   getEmployeesClub() {
     return this.http.get<Clubs[]>(`${this.Url}/clubs/all`);

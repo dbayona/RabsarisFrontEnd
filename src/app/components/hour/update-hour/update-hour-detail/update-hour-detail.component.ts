@@ -16,6 +16,7 @@ export class UpdateHourDetailComponent implements OnInit {
 
   employeesHoursDetails: any[] = [];
   empHourDetails: EmployeeHoursDetails;
+  eHourDetails: EmployeeHoursDetails;
   titleModalDate: string;
   startDate: string;
   endDate: string;
@@ -45,8 +46,29 @@ export class UpdateHourDetailComponent implements OnInit {
 
     this.employee.getEmployeeHoursDetailsById(this.data).subscribe( (data: any) => {
       this.employeesHoursDetails = data.data;
+
+      this.employeesHoursDetails = this.employeesHoursDetails.map(x => {
+        return {
+          ...x,
+          start_regular_time: x.start_regular_time === null ? null : moment(x.start_regular_time, 'HH:mm').format('h:mm A'),
+          end_regular_time: x.end_regular_time === null ? null : moment(x.end_regular_time, 'HH:mm').format('h:mm A'),
+          start_over_time: x.start_over_time === null ? null : moment(x.start_over_time, 'HH:mm').format('h:mm A'),
+          end_over_time: x.end_over_time === null ? null : moment(x.end_over_time, 'HH:mm').format('h:mm A')
+        };
+      });
+
       console.log(data);
     });
+  }
+
+  // Store Data
+  storeData() {
+    this.dataShare.storage = {
+      id: this.dataShare.storage.id_hour,
+      id_emp: this.dataShare.storage.id_emp,
+      startDate: this.dataShare.storage.startDate,
+      endDate : this.dataShare.storage.endDate
+    };
   }
 
   // Calculate hours worked
@@ -59,8 +81,9 @@ export class UpdateHourDetailComponent implements OnInit {
     const hours = endTime.diff(startTime, 'hours');
     const minutes = moment.utc(moment(endTime, 'HH:mm:ss').diff(moment(startTime, 'HH:mm:ss'))).format('mm');
 
-    this.empHourDetails.total_regular_time = hours + ':' + minutes;
-    console.log(hours + ':' + minutes);
+    this.empHourDetails.total_regular_time = Number((hours + Number(minutes) / 60).toFixed(2));
+    console.log(this.empHourDetails.total_regular_time);
+
     } else {
       // start time and end time
       const startOverTime = moment(this.empHourDetails.start_over_time, 'HH:mm:ss a');
@@ -69,8 +92,8 @@ export class UpdateHourDetailComponent implements OnInit {
       const hoursOver = endOverTime.diff(startOverTime, 'hours');
       const minutesOver = moment.utc(moment(endOverTime, 'HH:mm:ss').diff(moment(startOverTime, 'HH:mm:ss'))).format('mm');
 
-      this.empHourDetails.total_over_time = hoursOver + ':' + minutesOver;
-      console.log(hoursOver + ':' + minutesOver);
+      this.empHourDetails.total_over_time = Number((hoursOver + Number(minutesOver) / 60).toFixed(2));
+      console.log(this.empHourDetails.total_over_time);
     }
   }
 
@@ -150,21 +173,20 @@ export class UpdateHourDetailComponent implements OnInit {
   }
 
   btnCancel() {
-    this.dataShare.storage = {
+    /*this.dataShare.storage = {
       id: this.dataShare.storage.id_hour,
       id_emp: this.dataShare.storage.id_emp,
       startDate: this.dataShare.storage.startDate,
       endDate : this.dataShare.storage.endDate
-    };
+    };*/
+    this.storeData();
     this.router.navigate(['/hour/update-hour']);
   }
 
   btnGuardar() {
-    console.log('Modelo');
-    console.log(this.employeesHoursDetails);
-
-    // let arrValues = Object.values( this.employeesHoursDetails) ;
-    // console.log(arrValues);
+    // console.log('Modelo');
+    // console.log(this.employeesHoursDetails);
+    // console.log(this.empHourDetails);
 
     // items = items.map(x => (x.id === item.id) ? item : x)
     this.employeesHoursDetails = this.employeesHoursDetails.map(x => {
@@ -175,6 +197,15 @@ export class UpdateHourDetailComponent implements OnInit {
         start_over_time:  moment(x.start_over_time, 'h:mm A').format('HH:mm'),
         end_over_time:  moment(x.end_over_time, 'h:mm A').format('HH:mm')
       };
+    });
+
+    // let arrValues = Object.values( this.employeesHoursDetails) ;
+    // console.log(arrValues);
+
+    this.employee.putUpdateHoursDetails(this.employeesHoursDetails).subscribe( (data: any) => {
+      console.log('Horas de Trabajo Actualizadas...');
+      this.storeData();
+      this.router.navigate(['hour/update-hour']);
     });
 
     console.log(this.employeesHoursDetails);
