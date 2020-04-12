@@ -15,6 +15,8 @@ import { ClubComponent } from './components/payments/club/club.component';
 import { PayrollComponent } from './components/payments/payroll/payroll.component';
 import { PayrollDetailComponent } from './components/payments/payroll/payrolldetail/payrolldetail.component';
 import { ReadPayrolldetailComponent } from './components/payments/payroll/payrolldetail/read-payrolldetail/read-payrolldetail.component';
+// tslint:disable-next-line:max-line-length
+import { UpdatePayrolldetailComponent } from './components/payments/payroll/payrolldetail/update-payrolldetail/update-payrolldetail.component';
 import { ThirdComponent } from './components/payments/third/third.component';
 import { ThirdDetailComponent } from './components/payments/third/thirddetail/thirddetail.component';
 import { LiquidationComponent } from './components/payments/liquidation/liquidation.component';
@@ -62,6 +64,9 @@ export const ROUTES: Routes = [
 },
 {
   path: 'payments/payroll/payrolldetail/read-payrolldetail', component: ReadPayrolldetailComponent
+},
+{
+  path: 'payments/payroll/payrolldetail/update-payrolldetail', component: UpdatePayrolldetailComponent
 },
 {
   path: 'payments/third', component: ThirdComponent

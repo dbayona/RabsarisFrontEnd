@@ -33,28 +33,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>23 Enero al 05 Febrero</td>
-                                    <td>22274.42</td>
+                                <tr *ngFor="let payroll of allPayroll">
+                                    <td id="fulldate{{payroll.id}}">{{ payroll.startdate | date:'dd MMMM' | titlecase }} al {{ payroll.enddate | date:'dd MMMM yyyy' | titlecase }}</td>
+                                    <td id="total{{payroll.id}}">{{ payroll.total }}</td>
                                     <td>
-                                        <a routerLink="payrolldetail" routerLinkActive="router-link-active" class="text-blue" style="font-size:20px; margin-right: 20px;">
+                                        <a (click)="execAction(payroll.id, 'R', payroll)" class="text-blue" style="font-size:20px; margin-right: 20px; cursor: pointer;">
                                             <i class="fa fa-search"></i>
                                         </a>
-                                        <a href="#" data-toggle="modal" data-target="#modal-default" class="text-red" style="font-size:20px; margin-right: 20px;">
+                                        <a (click)="execAction(payroll.id, 'U', payroll)" class="text-green" style="font-size:20px; margin-right: 20px; cursor: pointer;">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <!--<a (click)="execAction(payroll.id, 'D')" data-toggle="modal" data-target="#modal-default" class="text-red" style="font-size:20px; margin-right: 20px; cursor: pointer;">
                                             <i class="fa fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>06 Febrero al 19 Febrero</td>
-                                    <td>0.00</td>
-                                    <td>
-                                        <a routerLink="payrolldetail" routerLinkActive="router-link-active" class="text-blue" style="font-size:20px; margin-right: 20px;">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                        <a href="#" data-toggle="modal" data-target="#modal-default" class="text-red" style="font-size:20px; margin-right: 20px;">
-                                            <i class="fa fa-times"></i>
-                                        </a>
+                                        </a>-->
                                     </td>
                                 </tr>
                             </tbody>
@@ -80,7 +71,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary">Guardar</button>
+                        <button (click)="deleteAction()" type="button" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->

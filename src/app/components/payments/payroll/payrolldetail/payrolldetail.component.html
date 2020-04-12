@@ -18,9 +18,8 @@
             <div class="col-md-12">
                 <!-- general form elements -->
                 <div class="box box-primary">
-                    <div class="box-header ">
+                    <div class="box-header with-border">
                         <h3 class="box-title" style="margin-top: 16px">Registro de Planilla</h3>
-                        <small> 23 Enero al 05 Febrero</small>
                         <a routerLink="#" routerLinkActive="router-link-active" style="float: right; font-size:30px;" class="text-primary">
                             <i class="fa fa-print"></i>
                         </a>
@@ -28,6 +27,9 @@
                     <!-- /.box-header -->
 
                     <div class="box-body">
+
+                        <h5 class="box-title" style="margin-top: 6px">{{ startDate | titlecase }} al {{ endDate | titlecase }}</h5>
+
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -41,40 +43,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Daniel Bayona</td>
-                                    <td>4.35</td>
-                                    <td>90</td>
-                                    <td>391.50</td>
-                                    <td>126.36</td>
-                                    <td>272.60</td>
+                                <tr *ngFor="let payroll of payrollDetails">
+                                    <td>{{payroll.fullname}}</td>
+                                    <td>{{payroll.salaryhour}}</td>
+                                    <td>{{payroll.totalhour}}</td>
+                                    <td>{{payroll.netsalary}}</td>
+                                    <td>{{payroll.totaltaxes}}</td>
+                                    <td>{{payroll.totalsalary}}</td>
                                     <td>
-                                        <a routerLink="read-payrolldetail" routerLinkActive="router-link-active" class="text-blue" style="font-size:20px; margin-right: 20px;">
+                                        <a *ngIf="mode === 'R'" (click)="execAction(payroll, 'R')" class="text-blue" style="font-size:20px; margin-right: 20px; cursor: pointer;">
                                             <i class="fa fa-search"></i>
                                         </a>
-                                        <a routerLink="read-payrolldetail" class="text-green" style="font-size:20px; margin-right: 20px;">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ivan Carrasco</td>
-                                    <td>3.82</td>
-                                    <td>90</td>
-                                    <td>343.80</td>
-                                    <td>168.80</td>
-                                    <td>175.00</td>
-                                    <td>
-                                        <a routerLink="read-payrolldetail" routerLinkActive="router-link-active" class="text-blue" style="font-size:20px; margin-right: 20px;">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                        <a routerLink="read-payrolldetail" class="text-green" style="font-size:20px; margin-right: 20px;">
+                                        <a *ngIf="mode === 'U'" (click)="execAction(payroll, 'U')" class="text-green" style="font-size:20px; margin-right: 20px; cursor: pointer;">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+
+                    <div class="box-footer">
+                        <button routerLink="/payments/payroll" routerLinkActive="router-link-active" class="btn btn-success pull-right">Regresar</button>
                     </div>
 
                 </div>

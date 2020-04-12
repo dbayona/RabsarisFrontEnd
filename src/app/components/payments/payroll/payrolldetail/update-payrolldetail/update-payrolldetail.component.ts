@@ -4,13 +4,12 @@ import { Router } from '@angular/router';
 import { Data } from 'src/app/services/data.service';
 import { Payroll } from 'src/app/models/Payroll';
 
-import * as moment from 'moment';
-
 @Component({
-  selector: 'app-read-payrolldetail',
-  templateUrl: './read-payrolldetail.component.html'
+  selector: 'app-update-payrolldetail',
+  templateUrl: './update-payrolldetail.component.html',
+  styles: []
 })
-export class ReadPayrolldetailComponent implements OnInit {
+export class UpdatePayrolldetailComponent implements OnInit {
 
   payroll: Payroll;
   mode: String;
@@ -21,16 +20,18 @@ export class ReadPayrolldetailComponent implements OnInit {
               private router: Router,
               private dataShare: Data) {
 
-      this.mode = this.dataShare.storage.mode;
-      console.log('MODE --> ' + this.mode);
+    this.mode = this.dataShare.storage.mode;
+    console.log('MODE --> ' + this.mode);
 
-      this.startDate = this.dataShare.storage.startDate;
-      this.endDate = this.dataShare.storage.endDate;
+    this.startDate = this.dataShare.storage.startDate;
+    this.endDate = this.dataShare.storage.endDate;
 
-      // Llamado al servicio
-      this.getPayrollByEmployee(this.dataShare.storage);
+    // Llamado al servicio
+    this.getPayrollByEmployee(this.dataShare.storage);
+  }
 
-    }
+  ngOnInit() {
+  }
 
   // Metodo que llama al servicio de Listar un cliente
   getPayrollByEmployee(data: any) {
@@ -40,9 +41,6 @@ export class ReadPayrolldetailComponent implements OnInit {
       this.payroll = data.data;
       console.log(data.data);
     });
-  }
-
-  ngOnInit() {
   }
 
   // Store Data

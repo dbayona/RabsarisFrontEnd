@@ -82,4 +82,19 @@ export class EmployeeService {
   putUpdateClubById(club: Clubs) {
     return this.http.put<Clubs>(`${this.Url}/clubs/update`, club);
   }
+
+  // List all payroll
+  getPayroll() {
+    return this.http.get<Clubs[]>(`${this.Url}/payroll/all`);
+  }
+
+  // List all payroll
+  postPayrollDetails(id) {
+    return this.http.post<Clubs[]>(`${this.Url}/payroll/details`, {id_hour: id});
+  }
+
+  // Payroll Details by Employee
+  postPayrollDetailByEmployee(data) {
+    return this.http.post<Clubs[]>(`${this.Url}/payroll/detail/employee`, {id_hour: data.id_hour, id_emp: data.id_emp});
+  }
 }

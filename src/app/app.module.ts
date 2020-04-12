@@ -20,6 +20,7 @@ import { ClubComponent } from './components/payments/club/club.component';
 import { PayrollComponent } from './components/payments/payroll/payroll.component';
 import { PayrollDetailComponent } from './components/payments/payroll/payrolldetail/payrolldetail.component';
 import { ReadPayrolldetailComponent } from './components/payments/payroll/payrolldetail/read-payrolldetail/read-payrolldetail.component';
+
 import { LiquidationComponent } from './components/payments/liquidation/liquidation.component';
 import { ThirdComponent } from './components/payments/third/third.component';
 import { LiquidationDetailComponent } from './components/payments/liquidation/liquidationdetail/liquidationdetail.component';
@@ -40,6 +41,7 @@ import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { ReadHourComponent } from './components/hour/read-hour/read-hour.component';
 import { UpdateHourDetailComponent } from './components/hour/update-hour/update-hour-detail/update-hour-detail.component';
+import { UpdatePayrolldetailComponent } from './components/payments/payroll/payrolldetail/update-payrolldetail/update-payrolldetail.component';
 
 registerLocaleData(localeEs);
 
@@ -68,7 +70,8 @@ registerLocaleData(localeEs);
     UpdateEmployeeComponent,
     UpdateHourComponent,
     ReadHourComponent,
-    UpdateHourDetailComponent
+    UpdateHourDetailComponent,
+    UpdatePayrolldetailComponent
   ],
   imports: [
     BrowserModule,
